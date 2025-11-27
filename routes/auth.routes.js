@@ -4,6 +4,8 @@ const { buildErrorMessage } = require("vite");
 
 const router = require("express").Router();
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken");
+const verifyToken = require("../middlewares/auth.middlewares");
 
 // POST "/api/auth/signup" -> creat the doc of the user
 router.post("/signup", async(req, res, next) => {
@@ -79,19 +81,37 @@ router.post("/login", async (req, res, next) => {
             res.status(400).json({errorMessage: "password is not correct, try again!"})
             return;
         }
+        //*Good authentication sistem for the user
 
-        res.send("correct login")
+        //payload is the hash info from the user that shoul be unique
+        const payload = {
+            _id: foundUser._id,
+            email: foundUser.email,
+        }
+
+        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+            algorithm: "HS256", expiresIn: "7d"
+        })
+
+
+        res.status(200).json({authToken: authToken})
     } catch (error) {
         next(error)
     }
 
-
-
-   
 })
 
+
+
+
+
 // GET "/api/auth/verify" -> indicate to the client who the user is
+router.get("/verify", verifyToken ,(req, res) => {
 
+    
+    //validate the token and send to the client who the user is by passing the payload
+    res.status(200).json(req.payload)
 
+})
 
 module.exports = router

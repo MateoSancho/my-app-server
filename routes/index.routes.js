@@ -10,4 +10,14 @@ const authRouter = require("./auth.routes")
 router.use("/auth", authRouter)
 
 
+
+//example of private route
+const verifyToken = require("../middlewares/auth.middlewares")
+
+router.get("/example-private-route", verifyToken, (req, res) => {
+  console.log("user requesting things", req.payload)
+  res.send("private route")
+})
+
+
 module.exports = router;
