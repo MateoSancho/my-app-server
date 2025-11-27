@@ -55,7 +55,40 @@ router.post("/signup", async(req, res, next) => {
 
 
 //POST "/api/auth/login" -> to login and send the tken
+router.post("/login", async (req, res, next) => {
+    console.log(req.body)
 
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        res.status(400).json({errorMessage: "password and email are mandatory"})
+        return;
+    }
+
+    try {
+
+        const foundUser = await User.findOne({email: email})
+        console.log(foundUser)
+        if (!foundUser) {
+            res.status(400).json({errorMessage: "no user with that email"})
+            return;
+        }
+
+        const isPasswordMatch = await bcrypt.compare(password, foundUser.password)
+        if (isPasswordMatch === false) {
+            res.status(400).json({errorMessage: "password is not correct, try again!"})
+            return;
+        }
+
+        res.send("correct login")
+    } catch (error) {
+        next(error)
+    }
+
+
+
+   
+})
 
 // GET "/api/auth/verify" -> indicate to the client who the user is
 
