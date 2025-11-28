@@ -1,7 +1,5 @@
 const User = require("../models/User.model")
 
-const { buildErrorMessage } = require("vite");
-
 const router = require("express").Router();
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
@@ -44,7 +42,8 @@ router.post("/signup", async(req, res, next) => {
         await User.create({
             username: username,
             email: email,
-            password: hashPassword
+            password: hashPassword,
+            role: "user"
             
         })
         res.sendStatus(201)
@@ -83,10 +82,11 @@ router.post("/login", async (req, res, next) => {
         }
         //*Good authentication sistem for the user
 
-        //payload is the hash info from the user that shoul be unique
+        //payload is the hash info from the user that should be unique
         const payload = {
             _id: foundUser._id,
             email: foundUser.email,
+            role: foundUser.role
         }
 
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
@@ -103,8 +103,6 @@ router.post("/login", async (req, res, next) => {
 
 
 
-
-
 // GET "/api/auth/verify" -> indicate to the client who the user is
 router.get("/verify", verifyToken ,(req, res) => {
 
@@ -114,4 +112,10 @@ router.get("/verify", verifyToken ,(req, res) => {
 
 })
 
+
+// GET "/api/auth/profile" -> see the user profile without the password
+router.get("/profile", verifyToken, async (req,res) => {
+    const user = await User.findById(req.payload._id).select("-password");
+    res.json(user);
+});
 module.exports = router
