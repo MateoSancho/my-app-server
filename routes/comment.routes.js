@@ -21,7 +21,7 @@ router.get("/player/:playerId", async (req, res, next) => {
 router.post("/:playerId", verifyToken, async (req, res, next) => {
     try {
         const newComment = await Comment.create({
-            content: req.body.content,
+            text: req.body.text,
             author: req.payload._id,      //from the token
             player: req.params.playerId
         });
