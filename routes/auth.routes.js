@@ -113,9 +113,4 @@ router.get("/verify", verifyToken ,(req, res) => {
 })
 
 
-// GET "/api/auth/profile" -> see the user profile without the password
-router.get("/profile", verifyToken, async (req,res) => {
-    const user = await User.findById(req.payload._id).select("-password");
-    res.json(user);
-});
 module.exports = router
