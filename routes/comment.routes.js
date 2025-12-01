@@ -20,6 +20,11 @@ router.get("/player/:playerId", async (req, res, next) => {
 //* POST /api/comments/:playerId
 router.post("/:playerId", verifyToken, async (req, res, next) => {
     try {
+
+        if (!req.body.text || req.body.text.trim() === "") {
+            return res.status(400).json({ message: "comment cannot be empty"})
+        }
+
         const newComment = await Comment.create({
             text: req.body.text,
             author: req.payload._id,      //from the token
