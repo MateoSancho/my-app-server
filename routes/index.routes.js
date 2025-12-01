@@ -28,5 +28,9 @@ router.use("/positions", positionRouter);
 const commentRouter = require("./comment.routes");
 router.use("/comments", commentRouter);
 
+//users
+const userRouter = require("./user.routes");
+router.use("/users", userRouter)
+
 module.exports = router;
 
