@@ -1,36 +1,36 @@
 const router = require("express").Router();
 
-//  Test Route
-router.get("/", (req, res, next) => {
+// Test route
+router.get("/", (req, res) => {
   res.json("All good in here");
 });
 
+// Auth routes
 const authRouter = require("./auth.routes");
 router.use("/auth", authRouter);
 
-// example of private route
+// Private test route
 const verifyToken = require("../middlewares/auth.middlewares");
-
 router.get("/example-private-route", verifyToken, (req, res) => {
-  console.log("user requesting things", req.payload);
   res.send("private route");
 });
 
-// players
-const playerRouter = require("./player.routes");
-router.use("/players", playerRouter);
+// Players routes
+const playersRouter = require("./player.routes");
+router.use("/players", playersRouter);
 
-// positions
-const positionRouter = require("./position.routes");
-router.use("/positions", positionRouter);
+// Positions routes
+const positionsRouter = require("./position.routes");
+router.use("/positions", positionsRouter);
 
-// comments
-const commentRouter = require("./comment.routes");
-router.use("/comments", commentRouter);
+// Comments routes 
+const commentsRouter = require("./comment.routes");
+router.use("/comments", commentsRouter);
 
-//users
-const userRouter = require("./user.routes");
-router.use("/users", userRouter)
+// Users routes
+const usersRouter = require("./user.routes");
+router.use("/users", usersRouter);
 
 module.exports = router;
+
 
