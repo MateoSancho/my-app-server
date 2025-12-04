@@ -31,6 +31,10 @@ router.use("/comments", commentsRouter);
 const usersRouter = require("./user.routes");
 router.use("/users", usersRouter);
 
+// Cloudinary
+const uploadRoutes = require("./upload.routes");
+router.use("/upload", uploadRoutes);
+
 module.exports = router;
 
 
