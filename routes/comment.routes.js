@@ -9,7 +9,8 @@ const isAdmin = require("../middlewares/isAdmin.middlewares");
 
 router.get("/player/:playerId", async (req, res, next) => {
     try {
-        const comments = await Comment.find({ player: req.params.playerId }).populate("author", "-password");
+        const comments = await Comment.find({ player: req.params.playerId })
+         .populate("author", "username email");
         res.json(comments)
     } catch (error) {
         next(error);
