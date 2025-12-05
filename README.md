@@ -6,7 +6,7 @@
 
 ## Description
 
-Barça Pedia es una aplicación donde los usuarios pueden explorar jugadores históricos y actuales del FC Barcelona. Los administradores pueden crear, editar y eliminar jugadores, mientras que los usuarios pueden ver información, estadísticas y dejar comentarios.
+Barça Pedia is an application where users can explore past and present FC Barcelona players. Administrators can create, edit, and delete players, while users can view information, statistics, and leave comments.
 
 #### [Client Repo here](www.your-client-repo-url-here.com)  
 #### [Server Repo here](www.your-server-repo-url-here.com)
