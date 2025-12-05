@@ -85,24 +85,24 @@ User model
 
 
 ## Links
-Collaborators
+-Collaborators
 
-Anton
+Anton(https://github.com/antonsanchoe-arch)
 
-Mateo
+Mateo(https://github.com/MateoSancho)
 
-Project
+-Project
 
-Repository Link Client
+https://github.com/MateoSancho/futbol-project-client
 
-Repository Link Server
+https://github.com/MateoSancho/my-app-server
 
-Deploy Link
+https://barca-pedia.vercel.app/
 
-Trello
+-Trello
 
 Link to your trello board
 
-Slides
+-Slides
 
-Slides Link
+https://docs.google.com/presentation/d/1QrAjMWU1wV6tRuXLtNAvMUXiSNwhcvX8kxjNU1HJwKc/edit?slide=id.p#slide=id.p
