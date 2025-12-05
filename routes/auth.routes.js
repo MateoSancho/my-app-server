@@ -104,13 +104,22 @@ router.post("/login", async (req, res, next) => {
 
 
 // GET "/api/auth/verify" -> indicate to the client who the user is
-router.get("/verify", verifyToken ,(req, res) => {
-
+router.get("/verify", verifyToken ,async (req, res) => {
+    try {
+    // Find the full user document (without password)
+    const user = await User.findById(req.payload._id).select("-password");
     
-    //validate the token and send to the client who the user is by passing the payload
-    res.status(200).json(req.payload)
-
-})
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    // Return FULL user data
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Verify error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 module.exports = router

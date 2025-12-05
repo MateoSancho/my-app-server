@@ -1,6 +1,3 @@
-// ❗This is an example of a User Model. 
-// TODO: Please make sure you edit the User model to whatever makes sense in your project.
-
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
@@ -24,8 +21,11 @@ const userSchema = new Schema(
       type: String,
       enum: ["user", "admin"],
       default: "user"
+    },
+    profileImage: {
+      type: String,
+      default: "" // Will store Cloudinary URL
     }
-
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
