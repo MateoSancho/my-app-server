@@ -1,6 +1,6 @@
 # Barça Pedia — Server
 
-## [See the App!](www.your-deploy-url-here.com)
+## [See the App!](https://barca-pedia.vercel.app/)
 
 ![App Logo](your-image-logo-path-or-name)
 
